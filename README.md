@@ -239,13 +239,13 @@ be included. A shar file, including all files necessary,
 (p2.txt in ascii format), and any other files) should be submitted 
 by the deadline using turnin as follows:
 
-   turnin fn ree4620_2
+    turnin fn ree4620_2
 
 By my typing    make    after unsharing your file I should see an
 executable called p2 (if you did your project in C) that will 
 perform the syntax analysis. The analyzer will be invoked with:
 
-   p2 test_fn
+     p2 test_fn
 
 where p2 is the executable resulting from the make command 
 (if done in C or C++) or is a script that executes your project (if
@@ -260,21 +260,21 @@ is submitted on this date a penalty will be assessed.
 
 Thus, the makefile might be (as needed for python):
 
--------------------------------------------------
-all:
-	@echo "no makefile necessary, project in python"
--------------------------------------------------
+    -------------------------------------------------
+    all:
+	 @echo "no makefile necessary, project in python"
+    -------------------------------------------------
 
 the p1 script would then be:
 
--------------------------------------------------
-#!/bin/bash
-python myprj.py $1
--------------------------------------------------
+    -------------------------------------------------
+    #!/bin/bash
+    python myprj.py $1
+    -------------------------------------------------
 
 The shar file can be created as follows:
 
-shar makefile p1 myprj.py p2.txt  > fn
+    shar makefile p1 myprj.py p2.txt  > fn
 
 You should not shar a directory, ie when I unshar your project
 a new subdirectory should not be created.
@@ -295,7 +295,273 @@ simply report such and stop the program.
 
 ## Project 3
 
+Project 3 Semantics due 3/29/18 Thursday 11:59 PM (nearly midnight)
+
+SPECIFICATION:
+Project 3 is the construction of semantic analyzer. You are to include 
+in your parser appropriate checking not included in the grammar, but 
+defined by the language.
+
+This is going to be the test of the quality of your symbol
+table implemented during parsing. You are to determine and
+implement appropriate checks as discussed.
+
+Your project should be shar'd containing a makefile, source file,
+doc file, and typescript (showing your testing). The makefile file
+should be invoked with "make" creating an executable of p3. Your
+project will be invoked with p3 fn where fn is the data file to be
+analyzed. p3 is the executable resulting from the make command 
+or is a script that executes your project. BE SURE TO PROVIDE BOTH A
+MAKEFILE AND A P3 EXECUTABLE SCRIPT FOR YOUR PROJECT. Also, be sure
+to test the integrity of your shar.
+
+This project must be complete in that the lexical analyzer must be
+included to create the tokens required by the parser and
+semantic analyzer.
+
+Your project should report on a single line without any additional
+characters
+
+ACCEPT
+
+or 
+
+REJECT
+
+upon completion of the analysis.
+
+Note that turnin will report the 2 day late date, if the project
+is submitted on this date a penalty will be assessed.
+
+Ensure your shar is properly constructed. 
+
+Use turnin for submission as
+
+    turnin fn ree4620_3
+
+where fn is the shar'd file of your complete project.
+
+--------------------------
+
+The following represents a set of tests that might be considered. The
+list is not required, nor is it complete, but may be used as a goal
+for semantic analysis.
+
+functions declared int or float  must have a return value of the
+   correct type.
+void functions may or may not have a return, but must not return a
+   value.
+parameters and arguments agree in number
+parameters and arguments agree in type
+operand agreement
+operand/operator agreement
+array index agreement
+variable declaration (all variables must be declared ... scope)
+variable declaration (all variables declared once ... scope)
+void functions cannot have a return value
+each program must have one main function
+return only simple structures
+id's should not be type void
+each function should be defined (actually a linker error)
+
 ## Project 4
+
+Project 4 Due 4/12/18 Thursday 11:59 PM (nearly midnight)
+
+Intermediate Code Generation
+
+You should generate simple quadruples as explained in class and shown
+below.  When  you generate simple quadruples you should use the operators 
+as described in class.
+
+Your project should be shar'd containing a makefile, source file, doc
+file, and typescript (showing your testing). The makefile file should
+be invoked with "make" creating an executable of p4. Your project will
+be invoked with p4 fn1 where fn1 is the program file to be analyzed.
+The intermediate code should be written to the screen. Of course, fn1 fn2
+will be any name of my chosing.
+
+This project must be complete in that the lexical analyzer and
+parser must be included to create the parse tree as required.
+
+Use turnin for submission as
+
+    turnin fn ree4620_4
+
+where fn is the shar'd file of your complete project.
+
+    ----------------------------------------------------
+    Example test files and corresponding code generation:
+    ----------------------------------------------------
+    ----------------------------------------------------
+    Example 1
+
+    void main(void)
+    {
+      int x;
+      int y;
+      int z;
+      int m;
+       while(x + 3 * y > 5)
+       {
+         x = y + m / z;
+         m = x - y + z * m / z;
+       }
+    }
+
+    ----------------------------------------------------
+
+    1         func           main           void           0
+    2         alloc          4                             x
+    3         alloc          4                             y
+    4         alloc          4                             z
+    5         alloc          4                             m
+    6         mult           3              y              _t0 
+    7         add            x              _t0            _t1
+    8         comp           _t1            5              _t2
+    9         BRLEQ          _t2                           21
+    10        block
+    11        div            m              z              _t3
+    12        add            y              _t3            _t4
+    13        assign         _t4                           x
+    14        sub            x              y              _t5
+    15        times          z              m              _t6
+    16        div            _t6            z              _t7
+    17        add            _t5            _t7            _t8
+    18        assign         _t8                           m
+    19        end            block
+    20        BR                                           6
+    21        end            func           main
+
+    ----------------------------------------------------
+    ----------------------------------------------------
+    Example 2
+
+    int sub(int x)
+    {
+       return(x+x);
+    }
+    void main(void)
+    {
+      int x;
+      int y;
+      y = sub(x);
+    }
+
+
+    ----------------------------------------------------
+
+    1         func           sub            int            2
+    2         param
+    3         alloc          4                             x
+    4         add            x              x              _t0
+    5         return                                       _t0
+    6         end            func           sub
+    7         func           main           void           0
+    8         alloc          4                             x
+    9         alloc          4                             y
+    10        arg                                          x
+    11        call           sub            1              _t1
+    12        assign         _t1                           y
+    13        end            func           main
+
+    Example 3
+
+    void main(void)
+    {
+       int x[10];
+       int y;
+       y = (x[5] + 2) * y;
+    }
+
+    ----------------------------------------------------
+
+    1	func		main		void		0
+    2  alloc 	 			40			x
+    3	alloc 	 			4			y
+    4	disp		x			20			_t0
+    5  add   	_t0		2			_t1
+    6  mult     _t1      y        _t2
+    7	asign		_t2					y
+    8	end		func		main
 
 ## Project 5
 
+Project 5  Due 4/19/18 Thursday 11:59 PM (nearly midnight)
+
+SPECIFICATIONS:
+This is a small assignment designed to give you experience
+using LEX (flex)  and YACC (bison).
+
+For this exercise you are to generate a LEX (.l) file to
+recognize tokens that are to be input to the parser (.y). Use
+YACC to recognize (or report) errors for the strings of the
+following grammar that generates sql queries. 
+
+-------------------------------------------------------------
+The following is a grammar for SQL syntax. 
+
+    start 
+	::= expression
+
+    expression
+	::= one-relation-expression | two-relation-expression
+
+    one-relation-expression
+	::= renaming | restriction | projection
+
+    renaming 
+	::= term RENAME attribute AS attribute
+
+    term 
+	::= relation | ( expression )
+
+    restriction
+	::= term WHERE comparison
+
+    projection 
+	::= term | term [ attribute-commalist ]
+
+    attribute-commalist
+	::= attribute | attribute , attribute-commalist
+
+    two-relation-expression
+	::= projection binary-operation expression
+
+    binary-operation
+	::= UNION | INTERSECT | MINUS | TIMES | JOIN | DIVIDEBY
+
+    comparison
+	::= attribute compare number
+
+    compare
+	::= < | > | <= | >= | = | <>
+
+    number
+	::= val | val number
+
+    val 
+	::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+
+    attribute 
+	::= CNO | CITY | CNAME | SNO | PNO | TQTY | 
+		  SNAME | QUOTA | PNAME | COST | AVQTY |
+		  S# | STATUS | P# | COLOR | WEIGHT | QTY
+
+    relation 
+	::= S | P | SP | PRDCT | CUST | ORDERS
+
+-----------------------------------------------------------
+
+Shar the .l file (for lex), the .y (for yacc) file, test
+files, documentation and makefile only (no y.tab.c or lex.yy.c file).
+I should type "make" to cause the program to compile
+all appropriate portions (lex fn.l and yacc fn.y and cc
+fn.c ...) to an executable called p5.
+
+Program output should be one of two messages "ACCEPT"
+or "REJECT".
+
+Use turnin fn ree4620_5
+
+Your project will be invoked with p5 < test_file
