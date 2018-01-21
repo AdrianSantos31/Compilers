@@ -112,99 +112,98 @@ sequential fashion.
 Note: you may have an additional project assigned before this one is
 due.
 
-Sample input:
-/**/          /*/* */   */
-/*/*/****This**********/*/    */
-/**************/
-/*************************
-i = 333;        ******************/       */
+    Sample input:
+    /**/          /*/* */   */
+    /*/*/****This**********/*/    */
+    /**************/
+    /*************************
+    i = 333;        ******************/       */
 
-iiii = 3@33;
+    iiii = 3@33;
 
-int g 4 cd (int u, int v)      {
-if(v == >= 0) return/*a comment*/ u;
-else ret_urn gcd(vxxxxxxvvvvv, u-u/v*v);
-       /* u-u/v*v == u mod v*/
-!   
-}
+    int g 4 cd (int u, int v)      {
+    if(v == >= 0) return/*a comment*/ u;
+    else ret_urn gcd(vxxxxxxvvvvv, u-u/v*v);
+           /* u-u/v*v == u mod v*/
+    !   
+    }
 
-return void while       void main()
+    return void while       void main()
+
+    Sample output:
+    INPUT: /**/          /*/* */   */
+    INPUT: /*/*/****This**********/*/    */
+    INPUT: /**************/
+    INPUT: /*************************
+    INPUT: i = 333;        ******************/       */
+    *  
+    /  
+    INPUT: iiii = 3@33;
+    ID: iiii 
+    =
+    NUM: 3
+    Error: @33
+    ;
+
+    INPUT: int g 4 cd (int u, int v)      {
+    keyword: int
+    ID: g
+    NUM: 4
+    ID: cd
+    (
+    keyword: int
+    ID: u
+    ,
+    keyword: int
+    ID: v
+    )
+    {
+
+    INPUT: if(v == >= 0) return/*a comment*/ u;
+    keyword: if
+    (
+    ID: v
+    ==
+    >=
+    NUM: 0
+    )
+    keyword: return
+    ID: u
+    ;
+
+    INPUT: else ret_urn gcd(vxxxxxxvvvvv, u-u/v*v);
+    keyword: else
+    ID: ret
+    Error: _urn
+    ID: gcd
+    (
+    ID: vxxxxxxvvvvv
+    ,
+    ID: u
+    -
+    ID: u
+    /
+    ID: v
+    *
+     ID: v
+    )
+    ;
+    INPUT: /* u-u/v*v == u mod v*/
+
+    INPUT: !   
+    Error: !
+    INPUT: }
+    }
 
 
-Sample output:
-INPUT: /**/          /*/* */   */
-INPUT: /*/*/****This**********/*/    */
-INPUT: /**************/
-INPUT: /*************************
-INPUT: i = 333;        ******************/       */
-*  
-/  
-INPUT: iiii = 3@33;
-ID: iiii 
-=
-NUM: 3
-Error: @33
-;
-
-INPUT: int g 4 cd (int u, int v)      {
-keyword: int
-ID: g
-NUM: 4
-ID: cd
-(
-keyword: int
-ID: u
-,
-keyword: int
-ID: v
-)
-{
-
-INPUT: if(v == >= 0) return/*a comment*/ u;
-keyword: if
-(
-ID: v
-==
->=
-NUM: 0
-)
-keyword: return
-ID: u
-;
-
-INPUT: else ret_urn gcd(vxxxxxxvvvvv, u-u/v*v);
-keyword: else
-ID: ret
-Error: _urn
-ID: gcd
-(
-ID: vxxxxxxvvvvv
-,
-ID: u
--
-ID: u
-/
-ID: v
-*
- ID: v
-)
-;
-INPUT: /* u-u/v*v == u mod v*/
-
-INPUT: !   
-Error: !
-INPUT: }
-}
-
-
-INPUT: return void while       void main()
-keyword: return
-keyword: void
-keyword: while
-keyword: void
-ID: main
-(
-)
+    INPUT: return void while       void main()
+    keyword: return
+    keyword: void
+    keyword: while
+    keyword: void
+    ID: main
+    (
+    )
 
 
 Note: this example does not print the required symbol table, nor does
