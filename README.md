@@ -56,7 +56,7 @@ be included. A shar file, including all files necessary,
 ("text" in ascii format), and any other files) should be submitted 
 by the deadline using turnin as follows:
 
-   turnin fn ree4620_1
+    turnin fn ree4620_1
 
 By my typing    make    after unsharing your file, I should see an
 executable called p1, if you wrote your program in C,  that will 
@@ -64,7 +64,7 @@ perform the lexical analysis.
 
 The analyzer will be invoked with:
 
-   p1 test_fn
+     p1 test_fn
 
 where p1 is the executable resulting from the make command and
 test_fn is the test filename upon which lexical analysis is to be 
@@ -75,25 +75,25 @@ If you write in other languages, you must supply at p1 file
 that will execute your program.
 For example, such a p1 file might appear as:
 
-#!/bin/ksh
-ruby your_ruby_script $1
+    #!/bin/ksh
+    ruby your_ruby_script $1
 
 OR
 
-#!/bin/ksh
-java your_java_pgm $1
+    #!/bin/ksh
+    java your_java_pgm $1
 
 OR
 
-#!/bin/ksh
-python your_python_script $1
+    #!/bin/ksh
+    python your_python_script $1
 
 Note that turnin will report the 2 day late date, if the project
 is submitted on this date the penalty will be assessed.
 
 The shar file can be created as follows:
 
-shar fn1 fn2 fn3 fn4 > fn
+    shar fn1 fn2 fn3 fn4 > fn
 
 You should NOT shar a directory, i.e. when I unshar your project
 a new subdirectory should not be created.
